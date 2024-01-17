@@ -86,6 +86,9 @@ def chrome_defaults(*args, headless: bool = False, proxy: dict = None, **kwargs)
     ## regular
     options.add_argument('--disable-blink-features=AutomationControlled')
     options.add_argument('--profile-directory=Default')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--headless')
 
     ## experimental
     options.add_experimental_option('excludeSwitches', ['enable-automation'])

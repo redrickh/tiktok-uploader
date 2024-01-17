@@ -39,9 +39,10 @@ user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 	
 	split_window = "//button[./div[text()='Not now']]"
 	upload_video = "//input[@type='file']"
-	upload_finished = "//div[contains(@class, 'btn-cancel')]"
-	upload_confirmation = "//video" 
-	process_confirmation = "//img[@draggable='false']"
+	upload_in_progress = "//*[.='Cancel']"
+	upload_confirmation = "//div[@title]"
+	process_confirmation = "//div[contains(@class, 'cover-selector-image-container')]/img[contains(@class, 'cover-selector-image')]"
+
 
 	description = "//div[@contenteditable='true']"
 

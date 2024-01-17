@@ -60,7 +60,7 @@ def upload_video(filename=None, description='', cookies='', schedule: datetime.d
 
 
 def upload_videos(videos: list = None, auth: AuthBackend = None, proxy: dict = None, browser='chrome',
-                  browser_agent=None, on_complete=None, headless=False, num_retries : int = 1, *args, **kwargs):
+                  browser_agent=None, on_complete=None, headless=False, num_retires : int = 1, *args, **kwargs):
     """
     Uploads multiple videos to TikTok
 
@@ -150,7 +150,7 @@ def upload_videos(videos: list = None, auth: AuthBackend = None, proxy: dict = N
                     continue
 
             complete_upload_form(driver, path, description, schedule,
-                                 num_retries=num_retries, headless=headless,
+                                 num_retires=num_retires, headless=headless,
                                  *args, **kwargs)
         except Exception as exception:
             logger.error('Failed to upload %s', path)
@@ -339,11 +339,12 @@ def _set_video(driver, path: str = '', num_retries: int = 3, **kwargs) -> None:
             )
             upload_box.send_keys(path)
             # waits for the upload progress bar to disappear
-            upload_finished = EC.presence_of_element_located(
-                (By.XPATH, config['selectors']['upload']['upload_finished'])
+            upload_progress = EC.presence_of_element_located(
+                (By.XPATH, config['selectors']['upload']['upload_in_progress'])
                 )
 
-            WebDriverWait(driver, config['explicit_wait']).until(upload_finished)
+            WebDriverWait(driver, config['explicit_wait']).until(upload_progress)
+            WebDriverWait(driver, config['explicit_wait']).until_not(upload_progress)
 
             # waits for the video to upload
             upload_confirmation = EC.presence_of_element_located(
